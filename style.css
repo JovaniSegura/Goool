@@ -140,6 +140,7 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
 .areaPorteria01 {
   border-left: none;
 }
+
 .areaPorteria02 {
   border-right: none;
 }
@@ -231,7 +232,7 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
 .mensaje{
   position: absolute;
   top: 9.5%;
-  left: 50%;
+  left: 51%;
   width: 20%;
   height: auto;
   padding-top: 20%;
@@ -283,6 +284,19 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
   margin-right: -165px;
 }
 
+.porteria1,
+.porteria2 {
+  position: relative;
+  width: 50px;
+  height: 180px;
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+  filter: drop-shadow(0 0 1px black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .porteria1::before,
 .porteria2::before {
   position: absolute;
@@ -310,16 +324,6 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
   color: white;
 }
 
-.porteria1,
-.porteria2 {
-  position: relative;
-  width: 50px;
-  height: 180px;
-  border-top: 5px solid white;
-  border-bottom: 5px solid white;
-  filter: drop-shadow(0 0 1px black);
-}
-
 .porteria1 {
   background-color: green;
   border-left: 5px solid white;
@@ -327,4 +331,18 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
 .porteria2 {
   background-color: green;
   border-right: 5px solid white;
+}
+
+.balon{
+  width: 80%;
+  height: auto;
+}
+
+.balon01{
+  transition: left 1s ease;
+  display: none;
+}
+.balon02{
+  transition: left 1s ease;
+  display: none;
 }

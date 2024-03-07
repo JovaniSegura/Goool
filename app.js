@@ -6,6 +6,8 @@ let rotacionDer = "rotate(55deg)";
 let rotacionAleatoria;
 let mensaje = document.querySelector('.mensaje')
 let mensajeP = document.querySelector('.mensaje-p')
+let balon01 = document.querySelector('.balon01')
+let balon02 = document.querySelector('.balon02')
 
 let intervalo
 
@@ -22,7 +24,7 @@ function rotaN() {
 function tiempoPat() {
   let i = 2;
   intervalo = setInterval(() => {
-    if ((i < 0)) {
+    if ((i < 1)) {
       clearInterval(intervalo);
       detenerRotacionAleat();
       reload()
@@ -39,12 +41,18 @@ function detenerRotacionAleat() {
   clearTimeout(rotacionAleatoria);
 }
 
-function verificarGanadaPerdida() {}
+function ganador() {
+  if (flecha.style.transform == rotacionIzq){
+    balon01.style.display = 'inline'
+  } else {
+    balon02.style.display = 'inline'
+  }
+}
 
 function reload() {
   setTimeout(() => {
     window.location.reload();
-  }, 5000);
+  }, 3000);
 }
 
 function esperar3segundos() {
@@ -52,6 +60,7 @@ function esperar3segundos() {
     mensajeP.textContent = '3'
     mensajeP.style.fontSize = '33px'
     circuloCentro__btn.value = "Patear";
+    mensajeP.style.color = 'red'
     circuloCentro__btn.style.display = "inline";
     tiempoPat();
   }, 2000);
@@ -59,7 +68,6 @@ function esperar3segundos() {
 
 function mensajeParrafo(){
   mensajeP.textContent = 'Espera...'
-  mensajeP.style.color = 'red'
   mensajeP.style.fontSize = '30px'
 }
 
@@ -73,7 +81,7 @@ circuloCentro__btn.addEventListener("click", () => {
     circuloCentro__btn.style.zIndez
     detenerRotacionAleat();
     clearInterval(intervalo);
-    verificarGanadaPerdida();
+    ganador();
     reload();
   }
 });
