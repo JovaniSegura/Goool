@@ -12,6 +12,51 @@ main {
   display: flex;
 }
 
+.cancha2 {
+  position: absolute;
+  width: 100%;
+  height: 50vh;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.lin {
+  position: absolute;
+  /* background-color: black; */
+  height: 15%;
+  top: -15%;
+  border-radius: 30px;
+  z-index: 5;
+}
+
+.lin::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 75%;
+  background-image: url("./img/apple-touch-icon.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: 110%;
+  transition: all 1s ease;
+}
+
+.lin.mover::after {
+  background-position-x: -15%;
+}
+
+.linea1 {
+  top: 20%;
+  left: -4%;
+  transform-origin: bottom center;
+}
+
+.linea2 {
+  right: 0;
+  transform-origin: top right;
+}
+
 .flecha {
     position: absolute;
     width: 4%;
@@ -25,6 +70,14 @@ main {
     bottom: 2%;
     clip-path: polygon(50% 0%, 100% 50%, 100% 100%, 0% 100%, 0% 50%);
     border-radius: 0 0 30px 30px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.flechaBalon{
+  width: 85%;
+  height: auto;
 }
 
 .ladoIzq,
@@ -294,7 +347,7 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
   filter: drop-shadow(0 0 1px black);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items:flex-start;
 }
 
 .porteria1::before,
@@ -336,6 +389,7 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
 .balon{
   width: 80%;
   height: auto;
+  margin-top: 40%;
 }
 
 .balon01{
