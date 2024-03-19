@@ -3,6 +3,7 @@ let nombreDer = document.getElementById("nombreDer");
 let equipoIzq = document.getElementById("equipoIzq");
 let equipoDer = document.getElementById("equipoDer");
 let boton = document.querySelector(".boton");
+let infoRegNombre = document.querySelectorAll(".infoRegNombre");
 
 function validarCampos() {
   if (
@@ -18,31 +19,46 @@ function validarCampos() {
 }
 
 nombreIzq.addEventListener("input", () => {
-  if (nombreIzq.value === nombreDer.value) {
-    console.log("Por favor escoge un nombre diferente");
-    nombreIzq.value = "";
+  if (nombreIzq.value.match(/[a-zA-ZñÑ]/)) {
+    if (nombreIzq.value.toLowerCase() === nombreDer.value.toLowerCase()) {
+      infoRegNombre[0].textContent = "Por favor escoge un nombre diferente";
+      infoRegNombre[0].style.color = 'red'
+      nombreIzq.value = "";
+    } else {
+      infoRegNombre[0].textContent = "Nombre OK";
+      infoRegNombre[0].style.color = 'green'
+    }
   } else {
-    console.log("El nombre del 1er Jugador es: " + nombreIzq.value);
+    infoRegNombre[0].textContent = "Nombre Incorrecto";
+    infoRegNombre[0].style.color = 'red'
   }
   validarCampos();
 });
 
 nombreDer.addEventListener("input", () => {
-  if (nombreDer.value === nombreIzq.value) {
-    console.log("Por favor escoge un nombre diferente");
-    nombreDer.value = "";
+  if (nombreDer.value.match(/[a-zA-ZñÑ]/)) {
+    if (nombreDer.value.toLowerCase() === nombreIzq.value.toLowerCase()) {
+      infoRegNombre[1].textContent = "Por favor escoge un nombre diferente";
+      infoRegNombre[1].style.color = 'red'
+      nombreDer.value = "";
+    } else {
+      infoRegNombre[1].textContent = "Nombre OK";
+      infoRegNombre[1].style.color = 'green'
+    }
   } else {
-    console.log("El nombre del 2do Jugador es: " + nombreDer.value);
+    infoRegNombre[1].textContent = "Nombre Incorrecto";
+    infoRegNombre[1].style.color = 'red'
   }
   validarCampos();
 });
+
 
 equipoIzq.addEventListener("change", () => {
   if (equipoIzq.value === equipoDer.value) {
     console.log("Los equipos no pueden ser los mismos");
     equipoIzq.value = "";
   } else {
-    console.log("El equipo escogido por el 1er jugador es: " + equipoIzq.value);
+    console.log("El equipo escogido por el Jugador Local es: " + equipoIzq.value);
   }
   validarCampos();
 });
@@ -52,7 +68,7 @@ equipoDer.addEventListener("change", () => {
     console.log("Los equipos no pueden ser los mismos");
     equipoDer.value = "";
   } else {
-    console.log("El equipo escogido por el 2do jugador es: " + equipoDer.value);
+    console.log("El equipo escogido por el Jugador Visitante es: " + equipoDer.value);
   }
   validarCampos();
 });

@@ -22,11 +22,6 @@ aside{
   padding-right: 10%;
 }
 
-aside p{
-  text-align: center;
-  margin-bottom: 40px;
-}
-
 .asideColor{
   display: flex;
   flex-direction: column;
@@ -38,8 +33,17 @@ aside p{
   border-radius: 10px;
 }
 
-.nombre{
+.asideColor p:first-child{
+  margin-bottom: 40px;
+}
+
+.asideColor p{
+  text-align: center;
+}
+
+.asideColor p.infoRegNombre{
   margin-bottom: 30px;
+  font-size: 12px;
 }
 
 .boton{
