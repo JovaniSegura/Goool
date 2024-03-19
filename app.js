@@ -1,133 +1,58 @@
-let circuloCentro__btn = document.querySelector(".circuloCentro__btn-btn");
-let linea1 = document.querySelector(".linea1");
-let linea2 = document.querySelector(".linea2");
-let flecha = document.querySelector(".flecha");
-let flechaBalon = document.querySelector('.flechaBalon')
-let rotacionIzq = "rotate(-55deg)";
-let rotacionCero = "rotate(0deg)";
-let rotacionDer = "rotate(55deg)";
-let rotacionAleatoria;
-let mensaje = document.querySelector(".mensaje");
-let mensajeP = document.querySelector(".mensaje-p");
-let balon01 = document.querySelector(".balon01");
-let balon02 = document.querySelector(".balon02");
-let cancha2 = document.querySelector('.cancha2')
+let nombreIzq = document.getElementById("nombreIzq");
+let nombreDer = document.getElementById("nombreDer");
+let equipoIzq = document.getElementById("equipoIzq");
+let equipoDer = document.getElementById("equipoDer");
+let boton = document.querySelector(".boton");
 
-function ajustarLinea() {
-  let alto = window.innerHeight * 0.5;
-  let ancho = window.innerWidth * 0.4;
-  let longitud = Math.sqrt(alto * alto + ancho * ancho);
-  let angulo1 = (Math.atan2(-alto, -ancho) * 180) / Math.PI;
-  let angulo2 = (Math.atan2(-alto, ancho) * 180) / Math.PI;
-  function rotaN() {
-    let rotacionNumero = Math.floor(Math.random() * 2);
-    if (rotacionNumero === 0) {
-      flecha.style.transform = rotacionIzq;
-      lineaIzq(longitud, angulo1);
-    } else {
-      flecha.style.transform = rotacionDer;
-      lineaDer(longitud, angulo2);
-    }
-    rotacionAleatoria = setTimeout(rotaN, 50);
-  }
-  rotaN();
-}
-window.onresize = ajustarLinea;
-
-function lineaIzq(longitud, angulo1) {
-  linea2.style.display = "none";
-  linea1.style.width = longitud + "px";
-  linea1.style.transform = "rotate(" + angulo1 + "deg)";
-  linea1.style.display = "inline";
-  linea1.classList.add("mover");
-  setTimeout(() => {
-    linea1.classList.remove("mover");
-  }, 100);
-}
-
-function lineaDer(longitud, angulo2) {
-  linea1.style.display = "none";
-  linea2.style.width = longitud + "px";
-  linea2.style.transform = "rotate(" + angulo2 + "deg)";
-  linea2.style.display = "inline";
-  linea2.classList.add("mover");
-  setTimeout(() => {
-    linea2.classList.remove("mover");
-  }, 100);
-}
-
-let intervalo;
-
-function tiempoPat() {
-  let i = 2;
-  intervalo = setInterval(() => {
-    if (i < 1) {
-      clearInterval(intervalo);
-      detenerRotacionAleat();
-      reload();
-      [linea1, linea2].forEach(lineas => {lineas.style.display = 'none'})
-      flecha.style.transform = rotacionCero;
-      mensajeP.textContent = "Fin";
-    } else {
-      mensajeP.textContent = i;
-      i--;
-    }
-  }, 1000);
-}
-
-function detenerRotacionAleat() {
-  clearTimeout(rotacionAleatoria);
-}
-
-function rotacionBalon() {
-  if (flecha.style.transform == rotacionIzq) {
-    setTimeout(() => {
-      balon01.style.display = "inline";
-    }, 750);
+function validarCampos() {
+  if (
+    nombreIzq.value !== "" &&
+    nombreDer.value !== "" &&
+    equipoIzq.value !== "" &&
+    equipoDer.value !== ""
+  ) {
+    boton.style.display = "inline";
   } else {
-    setTimeout(() => {
-      balon02.style.display = "inline";
-    }, 750);
+    boton.style.display = "none";
   }
 }
 
-function ganador() {}
-
-function reload() {
-  setTimeout(() => {
-    window.location.reload();
-  }, 3000);
-}
-
-function esperar3segundos() {
-  setTimeout(() => {
-    mensajeP.textContent = "3";
-    mensajeP.style.fontSize = "33px";
-    circuloCentro__btn.value = "Patear";
-    mensajeP.style.color = "red";
-    circuloCentro__btn.style.display = "inline";
-    tiempoPat();
-  }, 2000);
-}
-
-function mensajeParrafo() {
-  mensajeP.textContent = "Espera...";
-  mensajeP.style.fontSize = "30px";
-}
-
-// prettier-ignore
-circuloCentro__btn.addEventListener("click", () => {
-  if (circuloCentro__btn.value !== "Patear") {
-    mensajeParrafo();
-    ajustarLinea();
-    [circuloCentro__btn, linea1, linea2].forEach(e => {e.style.display = "none";});
-    esperar3segundos();
+nombreIzq.addEventListener("input", () => {
+  if (nombreIzq.value === nombreDer.value) {
+    console.log("Por favor escoge un nombre diferente");
+    nombreIzq.value = "";
   } else {
-    detenerRotacionAleat();
-    clearInterval(intervalo);
-    rotacionBalon();
-    reload();
-    flechaBalon.style.display = 'none'
-    cancha2.style.zIndex = '2'
+    console.log("El nombre del 1er Jugador es: " + nombreIzq.value);
   }
+  validarCampos();
+});
+
+nombreDer.addEventListener("input", () => {
+  if (nombreDer.value === nombreIzq.value) {
+    console.log("Por favor escoge un nombre diferente");
+    nombreDer.value = "";
+  } else {
+    console.log("El nombre del 2do Jugador es: " + nombreDer.value);
+  }
+  validarCampos();
+});
+
+equipoIzq.addEventListener("change", () => {
+  if (equipoIzq.value === equipoDer.value) {
+    console.log("Los equipos no pueden ser los mismos");
+    equipoIzq.value = "";
+  } else {
+    console.log("El equipo escogido por el 1er jugador es: " + equipoIzq.value);
+  }
+  validarCampos();
+});
+
+equipoDer.addEventListener("change", () => {
+  if (equipoDer.value === equipoIzq.value) {
+    console.log("Los equipos no pueden ser los mismos");
+    equipoDer.value = "";
+  } else {
+    console.log("El equipo escogido por el 2do jugador es: " + equipoDer.value);
+  }
+  validarCampos();
 });

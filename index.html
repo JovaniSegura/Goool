@@ -4,66 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
-    <link rel="shortcut icon" href="./img/favicon-32x32.png" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="../img/favicon-32x32.png"
+      type="image/x-icon"
+    />
     <title>Goool</title>
   </head>
   <body>
     <main>
-      <div class="ladoIzq">
-        <div class="ladoIzq__equipo01">
-          <p class="textoLogoEq">Real Madrid</p>
-          <img class="imgPort" src="./img/logo-realmadrid.png" alt="" />
+      <aside>
+        <div class="asideColor">
+          <p>1er Jugador</p>
+          <label for="nombreIzq">Nombre:</label>
+          <input type="text" class="nombre" id="nombreIzq" placeholder="Nombre de jugador" />
+          <label for="equipoIzq">Escoge tu equipo:</label>
+          <select id="equipoIzq" name="equipoIzq">
+            <option value="" selected disabled>-</option>
+            <option value="real_madrid">Real Madrid</option>
+            <option value="barcelona">Barcelona</option>
+          </select>
         </div>
-        <div class="porteria1">
-          <img src="./img/apple-touch-icon.png" alt="" class="balon balon01">
+      </aside>
+      <aside>
+        <div class="asideColor">
+          <p>2do Jugador</p>
+          <label for="nombreDer">Nombre:</label>
+          <input type="text" class="nombre" id="nombreDer" placeholder="Nombre de jugador" />
+          <label for="equipoDer">Escoge tu equipo:</label>
+          <select id="equipoDer" name="equipoDer">
+            <option value="" selected disabled>-</option>
+            <option value="real_madrid" class="equipoEscog">Real Madrid</option>
+            <option value="barcelona" class="equipoEscog">Barcelona</option>
+          </select>
         </div>
-      </div>
-      <div class="cancha">
-        <div class="ezq01"></div>
-        <div class="ezq02"></div>
-        <div class="ezq03"></div>
-        <div class="ezq04"></div>
-        <div class="areaPorteria areaPorteria01">
-        </div>
-        <div class="areaDefensa areaDefensa01">
-          <div class="areaDefensa01__circulo"></div>
-        </div>
-        <div class="rayaCentro"></div>
-        <div class="areaDefensa areaDefensa02">
-          <div class="areaDefensa02__circulo"></div>
-        </div>
-        <div class="areaPorteria areaPorteria02">
-        </div>
-        <div class="mensaje">
-          <p class="mensaje-p">Tienes 3 segundos para patear</p>
-        </div>
-        <div class="circuloCentro">
-          <div class="circulitoCentro"></div>
-          <div class="circuloCentro__btn">
-            <input type="button" value="Comenzar" class="circuloCentro__btn-btn" />
-          </div>
-        </div>
-        <div class="bomba">
-          <div class="bomba-izq"></div>
-          <div class="bomba-der"></div>
-        </div>
-        <div class="cancha2">
-          <div class="lin linea1"></div>
-          <div class="lin linea2"></div>
-        </div>
-        <div class="flecha">
-          <img src="./img/apple-touch-icon.png" alt="" class="flechaBalon">
-        </div>
-      </div>
-      <div class="ladoDer">
-        <div class="ladoDer__equipo02">
-          <p class="textoLogoEq">Barcelona</p>
-          <img class="imgPort" src="./img/logo-barcelona.png" alt="" />
-        </div>
-        <div class="porteria2">
-          <img src="./img/apple-touch-icon.png" alt="" class="balon balon02">
-        </div>
-      </div>
+      </aside>
+      <input type="button" value="Jugar" class="boton">
     </main>
     <script src="./app.js"></script>
   </body>
