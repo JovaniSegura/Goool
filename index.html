@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./style.css" />
     <link
       rel="shortcut icon"
-      href="../img/favicon-32x32.png"
+      href="./img/favicon-32x32.png"
       type="image/x-icon"
     />
     <title>Goool</title>
@@ -25,13 +25,16 @@
             <option value="real_madrid">Real Madrid</option>
             <option value="barcelona">Barcelona</option>
           </select>
+          <p class="infoEscEquipo"></p>
         </div>
+        <img src="./img/logo-realmadrid.png" class="equiRealIzq" alt="" />
+        <img src="./img/logo-barcelona.png" class="equiBarcaIzq" alt="" />
       </aside>
       <aside>
         <div class="asideColor">
           <p>Equipo Visitante</p>
           <label for="nombreDer">Nombre:</label>
-          <input type="text"  id="nombreDer" placeholder="Nombre de jugador" />
+          <input type="text" id="nombreDer" placeholder="Nombre de jugador" />
           <p class="infoRegNombre"></p>
           <label for="equipoDer">Escoge tu equipo:</label>
           <select id="equipoDer" name="equipoDer">
@@ -39,9 +42,12 @@
             <option value="real_madrid" class="equipoEscog">Real Madrid</option>
             <option value="barcelona" class="equipoEscog">Barcelona</option>
           </select>
+          <p class="infoEscEquipo"></p>
         </div>
+        <img src="./img/logo-realmadrid.png" class="equiRealDer" alt="" />
+        <img src="./img/logo-barcelona.png" class="equiBarcaDer" alt="" />
       </aside>
-      <input type="button" value="Jugar" class="boton">
+      <input type="button" value="Jugar" class="boton" />
     </main>
     <script src="./app.js"></script>
   </body>

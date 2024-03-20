@@ -5,48 +5,54 @@
   font-family: sans-serif;
 }
 
-main{
+main {
   width: 100%;
   height: 100vh;
   display: flex;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url(./img/fondoindex.jpg);
+  background-size: cover;
 }
 
-aside{
+aside {
   width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: -3%;
+  align-items: center;
   padding-left: 10%;
   padding-right: 10%;
 }
 
-.asideColor{
+.asideColor {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;  
-  padding: 30px;
+  padding: 10%;
   background-color: rgba(0, 0, 0, 0.162);
+  background-color: white;
   box-shadow: 0 0 10px black;
   border-radius: 10px;
 }
 
-.asideColor p:first-child{
+.asideColor p:first-child {
   margin-bottom: 40px;
 }
 
-.asideColor p{
+.asideColor p {
   text-align: center;
 }
 
-.asideColor p.infoRegNombre{
+.asideColor p.infoRegNombre {
   margin-bottom: 30px;
   font-size: 12px;
 }
 
-.boton{
+.asideColor p.infoEscEquipo {
+  font-size: 12px;
+}
+
+.boton {
   position: absolute;
   width: 13%;
   height: 8%;
@@ -62,4 +68,14 @@ aside{
   cursor: pointer;
   color: white;
   display: none;
+}
+
+.equiRealIzq,
+.equiBarcaIzq,
+.equiRealDer,
+.equiBarcaDer {
+  display: none;
+  position: relative;
+  height: 30%;
+  margin-top: 5%;
 }
