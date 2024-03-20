@@ -2,7 +2,7 @@ let nombreIzq = document.getElementById("nombreIzq");
 let nombreDer = document.getElementById("nombreDer");
 let equipoIzq = document.getElementById("equipoIzq");
 let equipoDer = document.getElementById("equipoDer");
-let boton = document.querySelector(".boton");
+let botonJugar = document.querySelector(".botonJugar");
 let infoRegNombre = document.querySelectorAll(".infoRegNombre");
 let infoEscEquipo = document.querySelectorAll(".infoEscEquipo");
 let equiRealIzq = document.querySelector(".equiRealIzq");
@@ -17,9 +17,9 @@ function validarCampos() {
     equipoIzq.value !== "" &&
     equipoDer.value !== ""
   ) {
-    boton.style.display = "inline";
+    botonJugar.style.display = "inline";
   } else {
-    boton.style.display = "none";
+    botonJugar.style.display = "none";
   }
 }
 
@@ -31,6 +31,7 @@ nombreIzq.addEventListener("input", () => {
       nombreIzq.value = "";
     } else {
       infoRegNombre[0].textContent = "Nombre OK";
+      sessionStorage.setItem("Nombre Local", nombreIzq.value);
       infoRegNombre[0].style.color = "green";
     }
   } else {
@@ -48,6 +49,7 @@ nombreDer.addEventListener("input", () => {
       nombreDer.value = "";
     } else {
       infoRegNombre[1].textContent = "Nombre OK";
+      sessionStorage.setItem("Nombre Visit", nombreDer.value);
       infoRegNombre[1].style.color = "green";
     }
   } else {
@@ -66,6 +68,7 @@ equipoIzq.addEventListener("change", () => {
     equiBarcaIzq.style.display = "none";
   } else {
     infoEscEquipo[0].textContent = "Equipo OK";
+    sessionStorage.setItem("Equipo Local", equipoIzq.value);
     infoEscEquipo[0].style.color = "green";
     if (equipoIzq.value === "real_madrid") {
       equiRealIzq.style.display = "inline";
@@ -87,6 +90,7 @@ equipoDer.addEventListener("change", () => {
     equiBarcaDer.style.display = "none";
   } else {
     infoEscEquipo[1].textContent = "Equipo OK";
+    sessionStorage.setItem("Equipo Visit", equipoDer.value);
     infoEscEquipo[1].style.color = "green";
     if (equipoDer.value === "real_madrid") {
       equiRealDer.style.display = "inline";
@@ -98,3 +102,7 @@ equipoDer.addEventListener("change", () => {
   }
   validarCampos();
 });
+
+function redireccionar() {
+  window.location.href = "./play/index.html";
+}

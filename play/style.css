@@ -120,10 +120,11 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 
 }
 
 
-.imgPort{
+.logoEquipo{
   width: 80%;
   height: 90px;
   object-fit: contain;
+  display: none;
 }
 
 .ladoDer {
@@ -384,6 +385,14 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
 .porteria2 {
   background-color: green;
   border-right: 5px solid white;
+}
+
+.nombreMostrado{
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
 }
 
 .balon{

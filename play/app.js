@@ -12,7 +12,33 @@ let mensajeP = document.querySelector(".mensaje-p");
 let balon01 = document.querySelector(".balon01");
 let balon02 = document.querySelector(".balon02");
 let cancha2 = document.querySelector('.cancha2')
+let logoEquipoLocal = document.querySelectorAll('.logoEquipoLocal');
+let logoEquipoVisit = document.querySelectorAll('.logoEquipoVisit');
+let nombreMostrado = document.querySelectorAll('.nombreMostrado')
 
+/* ---------- Session Storage ---------- */
+let equipoLocal = sessionStorage.getItem('Equipo Local');
+let equipoVisit = sessionStorage.getItem('Equipo Visit');
+let nombreLocal = sessionStorage.getItem('Nombre Local')
+let nombreVisit = sessionStorage.getItem('Nombre Visit')
+
+function mostrarLogo(equipo, logo) {
+  if(equipo === 'real_madrid'){
+    logo[0].style.display = 'inline';
+    logo[1].style.display = 'none';
+  } else {
+    logo[1].style.display = 'inline';
+    logo[0].style.display = 'none';
+  }
+}
+
+mostrarLogo(equipoLocal, logoEquipoLocal);
+mostrarLogo(equipoVisit, logoEquipoVisit);
+
+nombreMostrado[0].textContent = nombreLocal
+nombreMostrado[1].textContent = nombreVisit
+
+/* -------- Funcionalidad Juego -------- */
 function ajustarLinea() {
   let alto = window.innerHeight * 0.5;
   let ancho = window.innerWidth * 0.4;
