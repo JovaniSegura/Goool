@@ -117,6 +117,7 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 
   align-items: center;
   word-break: break-all;
   text-align: center;
+  font-weight: bold;
 }
 
 
@@ -290,21 +291,50 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
   width: 20%;
   height: auto;
   padding-top: 20%;
-  background-color: aqua;
+  background-color:rgb(215, 216, 191);
   clip-path: polygon(4% 0, 100% 0%, 100% 70%, 29% 70%, 0 100%, 14% 70%, 4% 70%);
   z-index: 2;
   filter: drop-shadow(0 0 10px black);
-}
-.mensaje-p{
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  width: 90%;
-  transform: translateX(-50%);
-  line-height: 100%;
   text-align: center;
-  filter: drop-shadow(0 0 1px white);
-  font-size: 16px;
+}
+
+.mensaje::before{
+  position: absolute;
+  width: 90%;
+  content: var(--mensaje-before);
+  top: 13%;
+  left: 70%;
+  transform: translate(-70%, -13%);
+  background-color: rgba(255, 255, 255, 0.509);
+  color: black;
+}
+
+.mensaje::after{
+  position: absolute;
+  width: 90%;
+  content: var(--mensaje-after);
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -33%);
+}
+
+.mensajeContadorP{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 71%;
+}
+
+.mensajeContadorP::before{
+  position: absolute;
+  width: 90%;
+  content: var(--mensaje-before);
+  bottom: 13%;
+  left: 70%;
+  transform: translate(-70%, -13%);
+  background-color: rgba(255, 255, 255, 0.509);
+  color: black;
 }
 
 .bomba {

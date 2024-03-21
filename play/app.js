@@ -8,7 +8,7 @@ let rotacionCero = "rotate(0deg)";
 let rotacionDer = "rotate(55deg)";
 let rotacionAleatoria;
 let mensaje = document.querySelector(".mensaje");
-let mensajeP = document.querySelector(".mensaje-p");
+let mensajeContadorP = document.querySelector('.mensajeContadorP')
 let balon01 = document.querySelector(".balon01");
 let balon02 = document.querySelector(".balon02");
 let cancha2 = document.querySelector('.cancha2')
@@ -39,6 +39,11 @@ nombreMostrado[0].textContent = nombreLocal
 nombreMostrado[1].textContent = nombreVisit
 
 /* -------- Funcionalidad Juego -------- */
+mensaje.style.setProperty('--mensaje-before', `"${nombreMostrado[0].textContent}"`);
+mensaje.style.setProperty('--mensaje-after', `"Tienes 3 segundos para patear"`);
+mensajeContadorP.style.setProperty('--mensaje-before', `"Tiro 1 de 10"`);
+mensaje.style.fontSize = "1.3vw";
+
 function ajustarLinea() {
   let alto = window.innerHeight * 0.5;
   let ancho = window.innerWidth * 0.4;
@@ -93,9 +98,9 @@ function tiempoPat() {
       reload();
       [linea1, linea2].forEach(lineas => {lineas.style.display = 'none'})
       flecha.style.transform = rotacionCero;
-      mensajeP.textContent = "Fin";
+      mensaje.style.setProperty('--mensaje-after', '"Fin"');
     } else {
-      mensajeP.textContent = i;
+      mensaje.style.setProperty('--mensaje-after', `"${i}"`);
       i--;
     }
   }, 1000);
@@ -127,18 +132,20 @@ function reload() {
 
 function esperar3segundos() {
   setTimeout(() => {
-    mensajeP.textContent = "3";
-    mensajeP.style.fontSize = "33px";
+    mensaje.style.setProperty('--mensaje-after', '"3"');
+    mensaje.style.fontSize = "3.3vw";
     circuloCentro__btn.value = "Patear";
-    mensajeP.style.color = "red";
+    mensaje.style.color = "red";
     circuloCentro__btn.style.display = "inline";
     tiempoPat();
   }, 2000);
 }
 
 function mensajeParrafo() {
-  mensajeP.textContent = "Espera...";
-  mensajeP.style.fontSize = "30px";
+  mensaje.style.setProperty('--mensaje-before', '""');
+  mensaje.style.setProperty('--mensaje-after', '"Espera..."');
+  mensajeContadorP.style.setProperty('--mensaje-before', `""`);
+  mensaje.style.fontSize = "2vw";
 }
 
 // prettier-ignore
