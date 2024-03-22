@@ -38,10 +38,33 @@ mostrarLogo(equipoVisit, logoEquipoVisit);
 nombreMostrado[0].textContent = nombreLocal
 nombreMostrado[1].textContent = nombreVisit
 
+let incTiro = Number(sessionStorage.getItem('Nro Tiro')) || 1;
+
+function nroTiro(){
+  incTiro += 1;
+  sessionStorage.setItem("Nro Tiro", incTiro);
+}
+
 /* -------- Funcionalidad Juego -------- */
-mensaje.style.setProperty('--mensaje-before', `"${nombreMostrado[0].textContent}"`);
-mensaje.style.setProperty('--mensaje-after', `"Tienes 3 segundos para patear"`);
-mensajeContadorP.style.setProperty('--mensaje-before', `"Tiro 1 de 10"`);
+if (incTiro <= 20) {
+  let tiro = Math.ceil(incTiro / 2);
+
+  let jugador;
+  if (incTiro % 2 === 0){
+    jugador = 1 
+  } else {
+    jugador = 0;
+  }
+
+  mensaje.style.setProperty('--mensaje-before', `"${nombreMostrado[jugador].textContent}"`);
+  mensaje.style.setProperty('--mensaje-after', `"Tienes 3 segundos para patear"`);
+  mensajeContadorP.style.setProperty('--mensaje-before', `"Tiro ${tiro} de 10"`);
+} else {
+  mensaje.style.setProperty('--mensaje-before', `""`);
+  mensaje.style.setProperty('--mensaje-after', `"El juego a finalizado, el ganador es: "`);
+  mensajeContadorP.style.setProperty('--mensaje-before', `""`);
+}
+
 mensaje.style.fontSize = "1.3vw";
 
 function ajustarLinea() {
@@ -127,6 +150,7 @@ function ganador() {}
 function reload() {
   setTimeout(() => {
     window.location.reload();
+    nroTiro();
   }, 3000);
 }
 
