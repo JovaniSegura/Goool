@@ -92,7 +92,7 @@ main {
 
 .ladoIzq {
   background: rgb(255,255,255);
-background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 16%, rgba(255,255,255,1) 32%, rgba(233,235,255,1) 42%, rgba(200,202,244,1) 50%, rgba(144,147,230,1) 59%, rgba(95,100,232,1) 66%, rgba(68,74,228,1) 82%, rgba(35,42,224,1) 100%);
+/* background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 16%, rgba(255,255,255,1) 32%, rgba(233,235,255,1) 42%, rgba(200,202,244,1) 50%, rgba(144,147,230,1) 59%, rgba(95,100,232,1) 66%, rgba(68,74,228,1) 82%, rgba(35,42,224,1) 100%); */
 }
 
 .ladoIzq__equipo01,
@@ -130,8 +130,7 @@ background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 
 
 .ladoDer {
   justify-content: start;
-  background: rgb(0,22,255);
-background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%);
+/* background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%); */
 }
 
 .cancha {
@@ -438,4 +437,10 @@ background: linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%
 .balon02{
   transition: left 1s ease;
   display: none;
+}
+
+.anotacion{
+  margin-top: 5px;
+  font-size: 2.5vw;
+  filter: drop-shadow(0 0 1px white);
 }

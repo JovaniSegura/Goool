@@ -15,21 +15,39 @@ let cancha2 = document.querySelector('.cancha2')
 let logoEquipoLocal = document.querySelectorAll('.logoEquipoLocal');
 let logoEquipoVisit = document.querySelectorAll('.logoEquipoVisit');
 let nombreMostrado = document.querySelectorAll('.nombreMostrado')
+let textoLogoEq = document.querySelectorAll('.textoLogoEq')
+let ladoIzq = document.querySelector('.ladoIzq')
+let ladoDer = document.querySelector('.ladoDer')
+let anotacion = document.querySelectorAll('.anotacion')
 
 /* ---------- Session Storage ---------- */
 let equipoLocal = sessionStorage.getItem('Equipo Local');
 let equipoVisit = sessionStorage.getItem('Equipo Visit');
-let nombreLocal = sessionStorage.getItem('Nombre Local')
-let nombreVisit = sessionStorage.getItem('Nombre Visit')
+let nombreLocal = sessionStorage.getItem('Nombre Local');
+let nombreVisit = sessionStorage.getItem('Nombre Visit');
 
-function mostrarLogo(equipo, logo) {
-  if(equipo === 'real_madrid'){
-    logo[0].style.display = 'inline';
-    logo[1].style.display = 'none';
-  } else {
-    logo[1].style.display = 'inline';
-    logo[0].style.display = 'none';
+/* -------------- Objetos -------------- */
+let equipos = {
+  'real_madrid': {
+    nombre: 'Real Madrid',
+    gradient: 'linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 16%, rgba(255,255,255,1) 32%, rgba(233,235,255,1) 42%, rgba(200,202,244,1) 50%, rgba(144,147,230,1) 59%, rgba(95,100,232,1) 66%, rgba(68,74,228,1) 82%, rgba(35,42,224,1) 100%)'
+  },
+  'barcelona': {
+    nombre: 'Barcelona',
+    gradient: 'linear-gradient(180deg, rgba(0,22,255,1) 0%, rgba(120,49,154,1) 100%)'
   }
+};
+
+/* ----------- Equipo y Logo ----------- */
+textoLogoEq[0].textContent = equipos[equipoLocal].nombre;
+textoLogoEq[1].textContent = equipos[equipoVisit].nombre;
+
+ladoIzq.style.background = equipos[equipoLocal].gradient;
+ladoDer.style.background = equipos[equipoVisit].gradient;
+
+function mostrarLogo(equipo, logos) {
+  logos[0].style.display = (equipo === 'real_madrid') ? 'inline' : 'none';
+  logos[1].style.display = (equipo === 'barcelona') ? 'inline' : 'none';
 }
 
 mostrarLogo(equipoLocal, logoEquipoLocal);
@@ -38,6 +56,7 @@ mostrarLogo(equipoVisit, logoEquipoVisit);
 nombreMostrado[0].textContent = nombreLocal
 nombreMostrado[1].textContent = nombreVisit
 
+/* -------------- Pateadas ------------- */
 let incTiro = Number(sessionStorage.getItem('Nro Tiro')) || 1;
 
 function nroTiro(){
@@ -45,7 +64,6 @@ function nroTiro(){
   sessionStorage.setItem("Nro Tiro", incTiro);
 }
 
-/* -------- Funcionalidad Juego -------- */
 if (incTiro <= 20) {
   let tiro = Math.ceil(incTiro / 2);
 
@@ -56,17 +74,29 @@ if (incTiro <= 20) {
     jugador = 0;
   }
 
+/* -------------- Mensajes ------------- */
   mensaje.style.setProperty('--mensaje-before', `"${nombreMostrado[jugador].textContent}"`);
   mensaje.style.setProperty('--mensaje-after', `"Tienes 3 segundos para patear"`);
   mensajeContadorP.style.setProperty('--mensaje-before', `"Tiro ${tiro} de 10"`);
 } else {
   mensaje.style.setProperty('--mensaje-before', `""`);
-  mensaje.style.setProperty('--mensaje-after', `"El juego a finalizado, el ganador es: "`);
+  let mensajeFinal = mensaje.style.setProperty('--mensaje-after', `""`);
+  if (mensajeFinal === mensajeFinal){
+    circuloCentro__btn.style.display = 'none'
+  }
   mensajeContadorP.style.setProperty('--mensaje-before', `""`);
 }
 
 mensaje.style.fontSize = "1.3vw";
 
+function mensajeParrafo() {
+  mensaje.style.setProperty('--mensaje-before', '""');
+  mensaje.style.setProperty('--mensaje-after', '"Espera..."');
+  mensajeContadorP.style.setProperty('--mensaje-before', `""`);
+  mensaje.style.fontSize = "2vw";
+}
+
+/* ------------ Linea de gol ----------- */
 function ajustarLinea() {
   let alto = window.innerHeight * 0.5;
   let ancho = window.innerWidth * 0.4;
@@ -112,6 +142,7 @@ function lineaDer(longitud, angulo2) {
 
 let intervalo;
 
+/* --------------- Tiempo -------------- */
 function tiempoPat() {
   let i = 2;
   intervalo = setInterval(() => {
@@ -133,19 +164,36 @@ function detenerRotacionAleat() {
   clearTimeout(rotacionAleatoria);
 }
 
+let golIzq = Number(sessionStorage.getItem('Goles Izq')) || 0;
+let golDer = Number(sessionStorage.getItem('Goles Der')) || 0;
+
 function rotacionBalon() {
   if (flecha.style.transform == rotacionIzq) {
+    golDer += 1;
+    sessionStorage.setItem("Goles Der", golDer);
+    anotacion[1].textContent = golDer
     setTimeout(() => {
       balon01.style.display = "inline";
     }, 750);
   } else {
+    golIzq += 1;
+    sessionStorage.setItem("Goles Izq", golIzq);
+    anotacion[0].textContent = golIzq
     setTimeout(() => {
       balon02.style.display = "inline";
     }, 750);
   }
 }
 
-function ganador() {}
+if (incTiro > 20){
+  if (golIzq > golDer){
+    mensaje.style.setProperty('--mensaje-after', `"El juego a finalizado, el ganador es: ${nombreLocal}"`);
+  } else if (golDer > golIzq) {
+    mensaje.style.setProperty('--mensaje-after', `"El juego a finalizado, el ganador es: ${nombreVisit}"`);
+  } else {
+    mensaje.style.setProperty('--mensaje-after', `"El juego a finalizado empatado"`);
+  }
+}
 
 function reload() {
   setTimeout(() => {
@@ -153,6 +201,13 @@ function reload() {
     nroTiro();
   }, 3000);
 }
+
+window.onload = function() {
+  golIzq = Number(sessionStorage.getItem('Goles Izq')) || 0;
+  golDer = Number(sessionStorage.getItem('Goles Der')) || 0;
+  anotacion[1].textContent = golDer
+  anotacion[0].textContent = golIzq
+};
 
 function esperar3segundos() {
   setTimeout(() => {
@@ -165,13 +220,7 @@ function esperar3segundos() {
   }, 2000);
 }
 
-function mensajeParrafo() {
-  mensaje.style.setProperty('--mensaje-before', '""');
-  mensaje.style.setProperty('--mensaje-after', '"Espera..."');
-  mensajeContadorP.style.setProperty('--mensaje-before', `""`);
-  mensaje.style.fontSize = "2vw";
-}
-
+/* ---------- funcionalidades ---------- */
 // prettier-ignore
 circuloCentro__btn.addEventListener("click", () => {
   if (circuloCentro__btn.value !== "Patear") {
