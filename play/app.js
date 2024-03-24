@@ -19,12 +19,20 @@ let textoLogoEq = document.querySelectorAll('.textoLogoEq')
 let ladoIzq = document.querySelector('.ladoIzq')
 let ladoDer = document.querySelector('.ladoDer')
 let anotacion = document.querySelectorAll('.anotacion')
+let jifIzq_img = document.querySelectorAll('.jifIzq_img')
+let jifDer_img = document.querySelectorAll('.jifDer_img')
 
 /* ---------- Session Storage ---------- */
 let equipoLocal = sessionStorage.getItem('Equipo Local');
 let equipoVisit = sessionStorage.getItem('Equipo Visit');
 let nombreLocal = sessionStorage.getItem('Nombre Local');
 let nombreVisit = sessionStorage.getItem('Nombre Visit');
+
+let formulario = ['Nombre Local', 'Nombre Visit', 'Equipo Local', 'Equipo Visit'];
+if (formulario.some(formu => sessionStorage.getItem(formu) === null)) {
+  window.location.href = "../index.html";
+  formulario.forEach(formu => sessionStorage.removeItem(formu));
+}
 
 /* -------------- Objetos -------------- */
 let equipos = {
@@ -82,7 +90,25 @@ if (incTiro <= 20) {
   mensaje.style.setProperty('--mensaje-before', `""`);
   let mensajeFinal = mensaje.style.setProperty('--mensaje-after', `""`);
   if (mensajeFinal === mensajeFinal){
+    let jugarDeNuevo
     circuloCentro__btn.style.display = 'none'
+    setTimeout(() => {
+      circuloCentro__btn.style.display = 'inline'
+      jugarDeNuevo = circuloCentro__btn.value = 'Deseas volver a jugar?'
+    }, 3000);
+    if (jugarDeNuevo === jugarDeNuevo){
+        circuloCentro__btn.addEventListener('click', () => {
+          sessionStorage.setItem('Goles Izq', 0);
+          sessionStorage.setItem('Goles Der', 0);
+          sessionStorage.setItem('Nro Tiro', 0);
+
+          window.location.reload();
+
+          golIzq = 0;
+          golDer = 0;
+          incTiro = 0;
+      })
+    }
   }
   mensajeContadorP.style.setProperty('--mensaje-before', `""`);
 }
@@ -153,6 +179,7 @@ function tiempoPat() {
       [linea1, linea2].forEach(lineas => {lineas.style.display = 'none'})
       flecha.style.transform = rotacionCero;
       mensaje.style.setProperty('--mensaje-after', '"Fin"');
+      circuloCentro__btn.style.display = 'none'
     } else {
       mensaje.style.setProperty('--mensaje-after', `"${i}"`);
       i--;
@@ -174,6 +201,8 @@ function rotacionBalon() {
     anotacion[1].textContent = golDer
     setTimeout(() => {
       balon01.style.display = "inline";
+      jifIzq_img[1].style.display = 'inline'
+      jifDer_img[0].style.display = 'inline'
     }, 750);
   } else {
     golIzq += 1;
@@ -181,6 +210,8 @@ function rotacionBalon() {
     anotacion[0].textContent = golIzq
     setTimeout(() => {
       balon02.style.display = "inline";
+      jifIzq_img[0].style.display = 'inline'
+      jifDer_img[1].style.display = 'inline'
     }, 750);
   }
 }
@@ -235,5 +266,6 @@ circuloCentro__btn.addEventListener("click", () => {
     reload();
     flechaBalon.style.display = 'none'
     cancha2.style.zIndex = '2'
+    circuloCentro__btn.style.display = 'none';
   }
 });

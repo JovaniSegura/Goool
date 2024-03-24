@@ -103,6 +103,20 @@ equipoDer.addEventListener("change", () => {
   validarCampos();
 });
 
+window.onload = function() {
+  sessionStorage.removeItem("Nombre Local");
+  sessionStorage.removeItem("Nombre Visit");
+  sessionStorage.removeItem("Equipo Local");
+  sessionStorage.removeItem("Equipo Visit");
+  sessionStorage.removeItem("Goles Izq");
+  sessionStorage.removeItem("Nro Tiro");
+  sessionStorage.removeItem("Goles Der");
+  nombreIzq.value = ''
+  nombreDer.value = ''
+  equipoIzq.value = ''
+  equipoDer.value = ''
+}
+
 function redireccionar() {
   window.location.href = "./play/index.html";
 }
