@@ -52,6 +52,25 @@ aside {
   font-size: 12px;
 }
 
+#nombreIzq,
+#equipoIzq,
+#nombreDer,
+#equipoDer{
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+#nombreIzq,
+#nombreDer{
+  padding-left: 3px;
+}
+
+#equipoIzq option,
+#equipoDer option{
+  font-size: 25px;
+}
+
 .botonJugar {
   position: absolute;
   width: 13%;

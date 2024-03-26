@@ -21,6 +21,9 @@ let ladoDer = document.querySelector('.ladoDer')
 let anotacion = document.querySelectorAll('.anotacion')
 let jifIzq_img = document.querySelectorAll('.jifIzq_img')
 let jifDer_img = document.querySelectorAll('.jifDer_img')
+let partidosGan = document.querySelectorAll('.partidosGan')
+let faSolid = document.querySelectorAll('.fa-solid')
+let regresarZonaRegistro = document.querySelector('.regresarZonaRegistro')
 
 /* ---------- Session Storage ---------- */
 let equipoLocal = sessionStorage.getItem('Equipo Local');
@@ -65,7 +68,12 @@ nombreMostrado[0].textContent = nombreLocal
 nombreMostrado[1].textContent = nombreVisit
 
 /* -------------- Pateadas ------------- */
-let incTiro = Number(sessionStorage.getItem('Nro Tiro')) || 1;
+let incTiro = sessionStorage.getItem('Nro Tiro');
+if (incTiro === null){
+  sessionStorage.removeItem("Goles Izq");
+  sessionStorage.removeItem("Goles Der");
+}
+incTiro = Number(incTiro) || 1;
 
 function nroTiro(){
   incTiro += 1;
@@ -76,10 +84,19 @@ if (incTiro <= 20) {
   let tiro = Math.ceil(incTiro / 2);
 
   let jugador;
+  let faSolidEstado = 'none';
   if (incTiro % 2 === 0){
-    jugador = 1 
+    jugador = 1
+    setInterval(() => {
+      faSolidEstado = faSolidEstado === 'none' ? 'inline' : 'none';
+      faSolid[0].style.display = faSolidEstado;
+    }, 500);
   } else {
     jugador = 0;
+    setInterval(() => {
+      faSolidEstado = faSolidEstado === 'none' ? 'inline' : 'none';
+      faSolid[1].style.display = faSolidEstado;
+    }, 500);
   }
 
 /* -------------- Mensajes ------------- */
@@ -94,7 +111,7 @@ if (incTiro <= 20) {
     circuloCentro__btn.style.display = 'none'
     setTimeout(() => {
       circuloCentro__btn.style.display = 'inline'
-      jugarDeNuevo = circuloCentro__btn.value = 'Deseas volver a jugar?'
+      jugarDeNuevo = circuloCentro__btn.value = 'Nuevo partido'
     }, 3000);
     if (jugarDeNuevo === jugarDeNuevo){
         circuloCentro__btn.addEventListener('click', () => {
@@ -216,15 +233,57 @@ function rotacionBalon() {
   }
 }
 
+function confetti(){
+  var duration = 15 * 1000;
+  var animationEnd = Date.now() + duration;
+  var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+  
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+  
+  var interval = setInterval(function() {
+    var timeLeft = animationEnd - Date.now();
+  
+    if (timeLeft <= 0) {
+      return clearInterval(interval);
+    }
+  
+    var particleCount = 50 * (timeLeft / duration);
+    // since particles fall down, start a bit higher than random
+    confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+    confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+  }, 250);
+}
+
+let partidosGIzq = Number(sessionStorage.getItem('Partidos G Izq')) || 0;
+let partidosGDer = Number(sessionStorage.getItem('Partidos G Der')) || 0;
 if (incTiro > 20){
   if (golIzq > golDer){
     mensaje.style.setProperty('--mensaje-after', `"El juego a finalizado, el ganador es: ${nombreLocal}"`);
+    confetti()
+    
+    partidosGIzq += 1;
+    sessionStorage.setItem("Partidos G Izq", partidosGIzq)
   } else if (golDer > golIzq) {
     mensaje.style.setProperty('--mensaje-after', `"El juego a finalizado, el ganador es: ${nombreVisit}"`);
+    confetti()
+    
+    partidosGDer += 1;
+    sessionStorage.setItem("Partidos G Der", partidosGDer)
   } else {
     mensaje.style.setProperty('--mensaje-after', `"El juego a finalizado empatado"`);
   }
+  sessionStorage.removeItem("Nro Tiro")
+  setTimeout(() => {
+    regresarZonaRegistro.style.display = 'inline'
+    regresarZonaRegistro.addEventListener('click', () => {
+      window.location.href = "../index.html";
+    })
+  }, 3000);
 }
+partidosGan[0].textContent = "Part. G: " + partidosGIzq
+partidosGan[1].textContent = "Part. G: " + partidosGDer
 
 function reload() {
   setTimeout(() => {

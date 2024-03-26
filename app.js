@@ -111,6 +111,8 @@ window.onload = function() {
   sessionStorage.removeItem("Goles Izq");
   sessionStorage.removeItem("Nro Tiro");
   sessionStorage.removeItem("Goles Der");
+  sessionStorage.removeItem("Partidos G Izq");
+  sessionStorage.removeItem("Partidos G Der");
   nombreIzq.value = ''
   nombreDer.value = ''
   equipoIzq.value = ''
